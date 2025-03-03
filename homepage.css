@@ -1,0 +1,45 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* Fullscreen Loader */
+.loader {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: #f8f7f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s ease-out;
+    z-index: 9999;
+}
+/* Brand Name Styling */
+.loader h1 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 15rem;
+    font-weight: 900;
+    color: black;
+    text-transform: uppercase;
+    animation: zoomOut 2s ease-in-out;
+}
+
+.gallery-item {
+    opacity: 0;
+    transform: translateY(100px); /* Start position (below the viewport) */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* When class "show" is added, they slide up */
+.gallery-item.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Zoom Out + Fade Effect */
+@keyframes zoomOut {
+    50% { transform: scale(1); opacity: 1; }
+    0% { transform: scale(0.2); opacity: 0; }
+}

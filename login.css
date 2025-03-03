@@ -1,0 +1,238 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Jetbrains Mono, Menio, Monaco, 'Courier New', monospace, Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f8f7f2
+}
+
+.container {
+    position: relative;
+    width: 800px;
+    height: 500px;
+    margin: 20px;
+}
+
+.blueBg {
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    height: 470px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #111111;
+    box-shadow: 0 5px 45px rgba(0, 0, 0, 0.3);
+    border: 8px #111111;
+    border-radius: 15px;
+}
+
+.blueBg .box {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.blueBg .box h2 {
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.blueBg .box button {
+    cursor: pointer;
+    padding: 10px 20px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    transition: 0.3s;
+    border: 2px solid #f8f7f2;
+}
+
+.blueBg .box button:hover {
+    background: #ffffff;
+}
+
+.formBx {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    width: 50%;
+    height: 115%;
+    background: #111111;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 45px rgb(255, 255, 255);
+    transition: 0.5s ease-in-out;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.formBx.active {
+    left: 50%;
+}
+
+.formBx .form {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 50px;
+    transition: 0.5s;
+}
+
+.formBx .signinForm {
+    transition-delay: 0.25s;
+}
+
+.formBx.active .signinForm {
+    left: -100%;
+    transition-delay: 0s;
+}
+
+.formBx .signupForm {
+    left: 100%;
+    transition-delay: 0s;
+}
+
+.formBx.active .signupForm {
+    left: 0;
+    transition-delay: 0.25s;
+}
+
+.formBx .form form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.formBx .form form h3 {
+    font-size: 1.5em;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.formBx .form form input {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    outline: none;
+    font-size: 16px;
+    border: 2px solid #f8f7f2;
+    border-radius: 5px;
+}
+
+.formBx .form form input[type="submit"] {
+    background: #111111;
+    border-color: #f8f7f2;
+    color: #ffffff;
+    max-width: 100px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.formBx .form form input[type="submit"]:hover {
+    background: #ffffff;
+}
+
+.formBx .form form .forgot {
+    color: #ffffff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.formBx .form form .forgot:hover {
+    color: #ffffff;
+}
+
+.error {
+    color: #ffffff;
+    font-size: 14px;
+    margin-top: -15px;
+    margin-bottom: 10px;
+}
+
+.formBx .form form input:not([type="submit"]) {
+    background-color: rgb(255, 255, 255);
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+.formBx .form form input:not([type="submit"]):focus {
+    background-color: rgb(255, 255, 255);
+    border-color: #ffffff;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 2px;
+}
+
+.input-group input[type="text"] {
+    width: 100%;
+    padding: 10px 40px 10px 10px; 
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.input-group label {
+    position: absolute;
+    left: 16px;
+    top: 32%;
+    transform: translateY(-50%);
+    font-size: 17px;
+    color: #111111;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus ~ label,
+.input-group input:valid ~ label {
+    top: -15%;
+    left: 15px;
+    font-size: 12px;
+    background-color: #f8f7f2;
+    padding: 0 5px;
+    color: #111111;
+    border-radius: 3px;
+}
+
+input {
+    background-color: #f8f7f2; 
+    transition: background-color 0.3s ease; 
+  }
+  
+  input:-webkit-autofill {
+    background-color: #f8f7f2 !important; 
+    -webkit-box-shadow: 0 0 0 1000px #f8f7f2 inset; 
+    transition: background-color 0.3s ease;
+  }
+  
+  input:-moz-autofill {
+    background-color: #f8f7f2 !important; 
+  }
+  
+  input:-ms-autofill {
+    background-color: #f8f7f2 !important;
+  }

@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8f7f2;
+    color: #000;
+    line-height: 1.5;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    width: 100%;
+    padding: 24px 24px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 16px;
+}
+
+.nav-link {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    text-decoration: none;
+    color: #000;
+}
+
+.hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 48px 24px;
+}
+
+h1 {
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    text-align: center;
+}
+
+.scroll-text {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-top: 24px;
+}
+
+.gallery {
+    width: 100%;
+    display: flex;
+    gap: 50px;
+    overflow-x: auto;
+    padding: 0 24px 48px;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+.gallery::-webkit-scrollbar {
+    display: none; 
+}
+
+.gallery-item {
+    min-width: 280px;
+    height: 350px;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+}
+
+
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    z-index: 1000;
+}
+
+.cookie-content {
+    background-color: white;
+    padding: 16px;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 500px;
+}
+
+.cookie-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.cookie-button {
+    padding: 4px 16px;
+    font-size: 0.875rem;
+    border: 1px solid #000;
+    background: none;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.cookie-button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+
+.content-page {
+    padding: 24px;
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+.content {
+    margin: 32px 0;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 24px;
+    color: #000;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+
+@media (min-width: 768px) {
+    header {
+        padding: 24px 48px 0;
+    }
+    
+    .nav-link {
+        font-size: 2.5rem;
+    }
+    
+    h1 {
+        font-size: 9rem;
+    }
+    
+    .gallery {
+        padding: 0 48px 48px;
+    }
+    
+    .cookie-content {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
