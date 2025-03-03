@@ -61,13 +61,17 @@ h1 {
 }
 
 .gallery {
+   
     width: 100%;
     display: flex;
-    gap: 50px;
-    overflow-x: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px; 
     padding: 0 24px 48px;
-    scrollbar-width: none; 
-    -ms-overflow-style: none; 
+    overflow: hidden;
+
+
 }
 
 .gallery::-webkit-scrollbar {
@@ -249,9 +253,14 @@ h1 {
     background-color: #d62976;
     transition-duration: 0.3s;
   }
+  /* Facebook*/
+  .containerTwo:hover {
+    background-color: #0064e0;
+    transition-duration: 0.3s;
+  }
   
   /* Whatsapp*/
-  .containerFour:hover {
+  .containerThree:hover {
     background-color: green;
     transition-duration: 0.3s;
   }
