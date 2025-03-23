@@ -1,7 +1,5 @@
 const express = require("express");
 const session = require("express-session");
-
-
 const MySQLStore = require("express-mysql-session")(session);
 const { connectMongoDB, connectMySQL } = require("./db"); // ✅ Import both databases
 const authRoutes = require("./routes/auth"); // ✅ Import authentication routes
@@ -9,6 +7,17 @@ const resetPasswordRoutes = require("./routes/resetPassword"); // ✅ Import res
 require("dotenv").config(); // ✅ Load environment variables
 const fs = require("fs"); // ✅ Required to read JSON files
 const nodemailer = require("nodemailer");
+
+const cors = require("cors"); // ✅ Import CORS middleware
+
+app.use(cors({
+    origin: ["https://retied.vercel.app", "http://localhost:3000"], // ✅ Allow frontend origins
+    credentials: true, // ✅ Allow sending cookies (for sessions)
+    methods: ["GET", "POST", "PUT", "DELETE"], // ✅ Allow required methods
+    allowedHeaders: ["Content-Type", "Authorization"], // ✅ Allow required headers
+}));
+
+
 
 const authMiddleware = require("./middlewares/authMiddleware");
 
