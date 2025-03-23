@@ -8,7 +8,7 @@ require("dotenv").config();
 const fs = require("fs");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
-const authMiddleware = require("./middlewares/authMiddleware");
+const authMiddleware = require("./middleware/authMiddleware");
 
 const app = express(); // ✅ Initialize app FIRST!
 const PORT = process.env.PORT || 3000;
