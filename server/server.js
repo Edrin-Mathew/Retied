@@ -1,36 +1,27 @@
 const express = require("express");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
-const { connectMongoDB, connectMySQL } = require("./db"); // ✅ Import both databases
-const authRoutes = require("./routes/auth"); // ✅ Import authentication routes
-const resetPasswordRoutes = require("./routes/resetPassword"); // ✅ Import reset password routes
-require("dotenv").config(); // ✅ Load environment variables
-const fs = require("fs"); // ✅ Required to read JSON files
+const { connectMongoDB, connectMySQL } = require("./db");
+const authRoutes = require("./routes/auth");
+const resetPasswordRoutes = require("./routes/resetPassword");
+require("dotenv").config();
+const fs = require("fs");
+const cors = require("cors");
 const nodemailer = require("nodemailer");
+const authMiddleware = require("./middlewares/authMiddleware");
 
-const cors = require("cors"); // ✅ Import CORS middleware
+const app = express(); // ✅ Initialize app FIRST!
+const PORT = process.env.PORT || 3000;
 
+app.use(express.json()); // ✅ Enable JSON parsing
+
+// ✅ Apply CORS Middleware
 app.use(cors({
     origin: ["https://retied.vercel.app", "http://localhost:3000"], // ✅ Allow frontend origins
     credentials: true, // ✅ Allow sending cookies (for sessions)
     methods: ["GET", "POST", "PUT", "DELETE"], // ✅ Allow required methods
     allowedHeaders: ["Content-Type", "Authorization"], // ✅ Allow required headers
 }));
-
-
-
-const authMiddleware = require("./middlewares/authMiddleware");
-
-// Protect profile route
-app.get("/auth/profile", authMiddleware, (req, res) => {
-    res.json({ success: true, user: req.session.user });
-});
-
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.use(express.json()); // ✅ Enable JSON parsing
 
 // ✅ Initialize Nodemailer Transporter Before Routes
 const transporter = nodemailer.createTransport({
@@ -44,7 +35,6 @@ const transporter = nodemailer.createTransport({
 // ✅ Store transporter in app.locals so it can be accessed in routes
 app.locals.transporter = transporter;
 
-
 // ✅ Connect to MySQL and MongoDB before starting the server
 Promise.all([connectMongoDB(), connectMySQL()])
     .then(([mongoDB, mysqlConnection]) => {
@@ -53,8 +43,8 @@ Promise.all([connectMongoDB(), connectMySQL()])
             process.exit(1);
         }
 
-        app.locals.mongoDB = mongoDB; // ✅ Store MongoDB reference (if needed later)
-        app.locals.mysql = mysqlConnection; // ✅ Store MySQL reference
+        app.locals.mongoDB = mongoDB;
+        app.locals.mysql = mysqlConnection;
 
         // ✅ Configure MySQL session store
         const sessionStore = new MySQLStore({}, mysqlConnection);
@@ -72,15 +62,9 @@ Promise.all([connectMongoDB(), connectMySQL()])
             }
         }));
 
-
-        const cors = require("cors"); // ✅ Import CORS
-app.use(cors({ origin: "https://retied.vercel.app", credentials: true }));
-
-        // ✅ Authentication Routes (Signup, Login, Logout, Profile)
         console.log("✅ Authentication routes loaded...");
         app.use("/auth", authRoutes);
 
-        // ✅ Reset Password Routes (Forgot Password, OTP, etc.)
         console.log("✅ Reset password routes loaded...");
         app.use("/reset", resetPasswordRoutes);
 
@@ -105,6 +89,7 @@ app.get('/api/products', (req, res) => {
     }
 });
 
+// ✅ Session Check Route
 app.get("/auth/session", (req, res) => {
     if (req.session.user) {
         res.json({ loggedIn: true, user: req.session.user });
@@ -113,6 +98,7 @@ app.get("/auth/session", (req, res) => {
     }
 });
 
+// ✅ Logout Route
 app.get("/auth/logout", (req, res) => {
     req.session.destroy((err) => {
         if (err) {
@@ -122,3 +108,7 @@ app.get("/auth/logout", (req, res) => {
     });
 });
 
+// ✅ Protect Profile Route
+app.get("/auth/profile", authMiddleware, (req, res) => {
+    res.json({ success: true, user: req.session.user });
+});
