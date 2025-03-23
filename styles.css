@@ -17,17 +17,21 @@ body {
     flex-direction: column;
 }
 
-header {
-    width: 100%;
-    padding: 24px 24px 0;
-}
-
 nav {
     display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    padding-bottom: 16px;
+    align-items: center; /* Centers items vertically */
+    justify-content: space-between; /* Keeps logo on the left, menu on the right */
+    background-image:url(images/homepage/navbarpic.webp) ;
+    padding: 10px 20px;
+    height: 80px; /* Ensures enough height for alignment */
+    
 }
+
+.logo {
+    height: 50px; /* Adjust logo size */
+    display: block; /* Removes any default inline spacing */
+}
+
 
 .nav-link {
     font-size: 2rem;
